@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_History"
+        android:icon="@drawable/icon_history"
+        android:title="@string/title_History"
+        android:visible="true" />
+    <item android:title="Features">
+        <menu>
+            <item
+                android:id="@+id/nav_Basket"
+                android:icon="@drawable/icon_cart"
+                android:title="@string/title_basket"
+                android:visible="true" />
+            <item
+                android:id="@+id/nav_Prices"
+                android:icon="@drawable/icon_features2"
+                android:title="@string/title_Prices"
+                android:visible="true" />
+            <item
+                android:id="@+id/nav_Discounts"
+                android:icon="@drawable/icon_discounts"
+                android:title="@string/title_Discounts"
+                android:visible="true" />
+        </menu>
+    </item>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_Login"
+                android:icon="@drawable/icon_login2"
+                android:title="@string/title_activity_login" />
+            <item
+                android:id="@+id/nav_Register"
+                android:icon="@drawable/icon_register"
+                android:title="@string/register" />
+            <item
+                android:id="@+id/nav_SignOut"
+                android:icon="@drawable/icon_signout"
+                android:title="@string/btn_sign_out" />
+        </menu>
+    </item>
+
+</menu>
