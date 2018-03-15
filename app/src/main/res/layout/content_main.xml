@@ -8,13 +8,6 @@
     tools:context="com.morgan.shopkeeper.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-    <FrameLayout
-        android:id="@+id/fragment_placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
-<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -77,6 +70,6 @@
 
             </LinearLayout>
         </HorizontalScrollView>
-    </LinearLayout> -->
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
