@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private DrawerLayout mDrawerLayout;
     boolean isLoggedIn = true;
     LayoutInflater layoutInflater;
     LinearLayout Popular_linearLayout, Recomended_linearLayout;
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         layoutInflater=(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         PopularCarouselView=(HorizontalScrollView)findViewById(R.id.Popular_Carousel_View);
         RecomendedCarouselView=(HorizontalScrollView)findViewById(R.id.Recomended_Carousel_View);
@@ -89,6 +92,13 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         updateUI();
+        // Begin the transaction
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        // Replace the contents of the container with the new fragment
+        ft.replace(R.id.fragment_placeholder, new bas);
+        // or ft.add(R.id.your_placeholder, new FooFragment());
+        // Complete the changes added above
+        ft.commit();
     }
     private void updateUI() {
         System.out.println(isLoggedIn);
@@ -180,6 +190,38 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.nav_History:
+                fragmentClass = BasketActivity.class;
+                break;
+            case R.id.nav_Basket:
+                fragmentClass = BasketActivity.class;
+                break;
+            case R.id.nav_Discounts:
+                fragmentClass = BasketActivity.class;
+                break;
+            default:
+                fragmentClass = FirstFragment.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        mDrawerLayout.closeDrawers();
+    }
+
     /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

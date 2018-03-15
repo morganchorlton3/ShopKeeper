@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ShopKeeper.iml" filepath="$PROJECT_DIR$/ShopKeeper.iml" />
-      <module fileurl="file://C:\AndroidStudio\apps\ShopKeeper\ShopKeeper-master.iml" filepath="C:\AndroidStudio\apps\ShopKeeper\ShopKeeper-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
