@@ -8,68 +8,9 @@
     tools:context="com.morgan.shopkeeper.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="Popular Products"
-            android:textColor="@color/textPrimary"
-            android:textSize="30sp" />
-
-        <HorizontalScrollView
-            android:id="@+id/Popular_Carousel_View"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="5dp"
-            android:scrollbars="horizontal">
-
-            <LinearLayout
-                android:id="@+id/Recomended_img_gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="Recomended Products"
-            android:textColor="@color/textPrimary"
-            android:textSize="30sp" />
-
-        <HorizontalScrollView
-            android:id="@+id/Recomended_Carousel_View"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="5dp"
-            android:scrollbars="horizontal">
-
-            <LinearLayout
-                android:id="@+id/Popular_img_gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
+        android:layout_height="match_parent"></FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
