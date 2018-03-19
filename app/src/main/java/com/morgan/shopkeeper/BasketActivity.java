@@ -11,7 +11,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -30,12 +34,17 @@ public class BasketActivity extends AppCompatActivity
     NavigationView navigationView;
     android.support.v7.widget.Toolbar toolbar=null;
 
+    private ListView mShoppingList;
+    private EditText mItemEdit;
+    private Button mAddButton, mclearButton;
+    private ArrayAdapter<String> mAdapter;
+
     boolean isLoggedIn = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_basket);
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -66,7 +75,37 @@ public class BasketActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        mShoppingList = (ListView) findViewById(R.id.shopping_listView);
+        mItemEdit = (EditText) findViewById(R.id.item_editText);
+        mAddButton = (Button) findViewById(R.id.add_button);
+        mclearButton = (Button) findViewById(R.id.clear_button);
+
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        mShoppingList.setAdapter(mAdapter);
+
+        mAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String item = mItemEdit.getText().toString();
+                mAdapter.add(item);
+                mAdapter.notifyDataSetChanged();
+                mItemEdit.setText("");
+            }
+        });
+        mclearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
+
     }
+
+
 
     @Override
     public void onStart() {

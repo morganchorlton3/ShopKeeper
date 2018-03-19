@@ -33,7 +33,10 @@
     <string name="title_Discounts">Featured Discounts</string>
     <string name="title_History">My History</string>
     <string name="title_Register">Register</string>
-
+    /* Shoping List */
+    <string name="item_editText_hint">Enter an item</string>
+    <string name="add_button_text">Add</string>
+    <string name="clear_button_text">Clear</string>
 
 </resources>
 
