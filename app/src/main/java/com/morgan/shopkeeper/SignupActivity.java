@@ -24,26 +24,24 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import in.goodiebag.carouselpicker.CarouselPicker;
-
-public class RegisterActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class SignupActivity extends AppCompatActivity
+    implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
-    private EditText inputEmail, inputPassword;
-    private Button btnLogin, btnSignUp;
-
+    Toolbar toolbar = null;
 
     boolean isLoggedIn = true;
+
+    private Button btnSignup, btnLogin;
+    private EditText inputEmail, inputPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_signup);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -66,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity
                 if (user == null) {
                     finish();
                     isLoggedIn = false;
-                }else{
+                } else {
                     isLoggedIn = true;
                 }
             }
@@ -75,25 +73,23 @@ public class RegisterActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        btnLogin = (Button) findViewById(R.id.login_btn);
-        btnSignUp = (Button) findViewById(R.id.sign_up_button);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
+        btnSignup = (Button) findViewById(R.id.btn_signup);
+        btnLogin = (Button) findViewById(R.id.btn_login);
 
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignupActivity.this, RegisterActivity.class));
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, SignupActivity.class));
-            }
-        });
-
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String email = inputEmail.getText().toString().trim();
-                String password = inputPassword.getText().toString().trim();
+                String email = inputEmail.getText().toString();
+                final String password = inputPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -105,57 +101,59 @@ public class RegisterActivity extends AppCompatActivity
                     return;
                 }
 
-                if (password.length() < 6) {
-                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
-                //create user
-                auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                //authenticate user
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(RegisterActivity.this, "Your account has been created and you have been logged in." + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
-                                            Toast.LENGTH_SHORT).show();
+                                    // there was an error
+                                    if (password.length() < 6) {
+                                        inputPassword.setError(getString(R.string.minimum_password));
+                                    } else {
+                                        Toast.makeText(SignupActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                    }
                                 } else {
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                                    isLoggedIn = true;
+                                    startActivity(intent);
                                     finish();
                                 }
                             }
                         });
-
             }
+
         });
-
-
     }
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         updateUI();
     }
+
     private void updateUI() {
         System.out.println(isLoggedIn);
         FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser != null) {
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
-            View header=navigationView.getHeaderView(0);
+            View header = navigationView.getHeaderView(0);
             String email = currentUser.getEmail();
-            TextView emaillabel = (TextView)header.findViewById(R.id.emailLabel);
+            TextView emaillabel = (TextView) header.findViewById(R.id.emailLabel);
             emaillabel.setText(email);
-        }else{
+        } else {
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
-            View header=navigationView.getHeaderView(0);
+            View header = navigationView.getHeaderView(0);
             ImageView avatar = (ImageView) header.findViewById(R.id.avatarImage);
-            TextView emailLabel = (TextView)header.findViewById(R.id.emailLabel);
+            TextView emailLabel = (TextView) header.findViewById(R.id.emailLabel);
             emailLabel.setVisibility(View.INVISIBLE);
             avatar.setVisibility(View.INVISIBLE);
         }
@@ -175,27 +173,27 @@ public class RegisterActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
 
             case R.id.nav_History:
-                Intent h= new Intent(RegisterActivity.this,MainActivity.class);
+                Intent h = new Intent(SignupActivity.this, MainActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_Basket:
-                Intent i= new Intent(RegisterActivity.this,BasketActivity.class);
+                Intent i = new Intent(SignupActivity.this, BasketActivity.class);
                 startActivity(i);
                 break;
             case R.id.nav_Discounts:
-                Intent g= new Intent(RegisterActivity.this,DiscountsActivity.class);
+                Intent g = new Intent(SignupActivity.this, DiscountsActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_Login:
-                Intent t= new Intent(RegisterActivity.this,SignupActivity.class);
+                Intent t = new Intent(SignupActivity.this, SignupActivity.class);
                 startActivity(t);
                 break;
             case R.id.nav_Register:
-                Intent e= new Intent(RegisterActivity.this,RegisterActivity.class);
+                Intent e = new Intent(SignupActivity.this, RegisterActivity.class);
                 startActivity(e);
                 break;
             case R.id.nav_SignOut:
@@ -204,11 +202,11 @@ public class RegisterActivity extends AppCompatActivity
         }
 
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     public void signOut() {
         Toast.makeText(getApplicationContext(), "You have been signed out", Toast.LENGTH_SHORT).show();
         auth.signOut();

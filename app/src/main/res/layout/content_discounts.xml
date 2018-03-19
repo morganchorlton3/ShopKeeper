@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.morgan.shopkeeper.BasketActivity"
+    tools:context="com.morgan.shopkeeper.DiscountsActivity"
     tools:showIn="@layout/app_bar_main">
 
 
@@ -17,8 +17,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="150dp"
         android:gravity="center"
-        android:text="@string/title_basket"
+        android:text="@string/title_Discounts"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="246dp" />
+
 </RelativeLayout>

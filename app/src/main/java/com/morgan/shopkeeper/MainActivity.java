@@ -1,41 +1,39 @@
 package com.morgan.shopkeeper;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import in.goodiebag.carouselpicker.CarouselPicker;
+
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
-    private DrawerLayout mDrawerLayout;
+    DrawerLayout drawer;
+    NavigationView navigationView;
+    Toolbar toolbar=null;
+
     boolean isLoggedIn = true;
 
+
+    CarouselPicker carouselPicker1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +54,6 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -71,7 +66,9 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
-        mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
     @Override
     public void onStart() {
@@ -114,36 +111,35 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        android.app.FragmentManager fragmentManager = getFragmentManager();
+        int id=item.getItemId();
+        switch (id){
 
-        if (id == R.id.nav_History) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                        , new HistoryFragment())
-                    .commit();
-        } else if (id == R.id.nav_Basket) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            , new BasketFragment())
-                    .commit();
-        } else if (id == R.id.nav_Prices) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            , new PriceFragment())
-                    .commit();
-        } else if (id == R.id.nav_Discounts) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            , new DiscountsFragment())
-                    .commit();
-        }else if (id == R.id.nav_Login) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        }else if(id == R.id.nav_Register){
-            setContentView(R.layout.activity_register);
-        } else if (id == R.id.nav_SignOut) {
-            signOut();
+            case R.id.nav_History:
+                Intent h= new Intent(MainActivity.this,MainActivity.class);
+                startActivity(h);
+                break;
+            case R.id.nav_Basket:
+                Intent i= new Intent(MainActivity.this,BasketActivity.class);
+                startActivity(i);
+                break;
+            case R.id.nav_Discounts:
+                Intent g= new Intent(MainActivity.this,DiscountsActivity.class);
+                startActivity(g);
+                break;
+            case R.id.nav_Login:
+                Intent t= new Intent(MainActivity.this,SignupActivity.class);
+                startActivity(t);
+                break;
+            case R.id.nav_Register:
+                Intent e= new Intent(MainActivity.this,RegisterActivity.class);
+                startActivity(e);
+                break;
+            case R.id.nav_SignOut:
+                signOut();
+                break;
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
