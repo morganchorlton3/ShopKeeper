@@ -29,14 +29,14 @@
     <string name="new_pass">New Password</string>
     /*Menu*/
     <string name="title_Prices">Compare Prices</string>
-    <string name="title_basket">Create Basket</string>
+    <string name="title_basket">Shopping List</string>
     <string name="title_Discounts">Featured Discounts</string>
-    <string name="title_History">My History</string>
+    <string name="title_History">Popular Products</string>
     <string name="title_Register">Register</string>
     /* Shoping List */
     <string name="item_editText_hint">Enter an item</string>
-    <string name="add_button_text">Add</string>
-    <string name="clear_button_text">Clear</string>
+    <string name="add_button_text">Get Total</string>
+    <string name="clear_button_text">Clear List</string>
 
 </resources>
 

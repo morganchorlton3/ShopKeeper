@@ -23,6 +23,9 @@ import android.widget.Toolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 import in.goodiebag.carouselpicker.CarouselPicker;
 
 public class BasketActivity extends AppCompatActivity
@@ -35,9 +38,11 @@ public class BasketActivity extends AppCompatActivity
     android.support.v7.widget.Toolbar toolbar=null;
 
     private ListView mShoppingList;
-    private EditText mItemEdit;
+    private TextView mItemLabel;
     private Button mAddButton, mclearButton;
     private ArrayAdapter<String> mAdapter;
+    private static ArrayList<ShoppingList> ShoppingList = MainActivity.getShoppingList();
+    private static DecimalFormat df2 = new DecimalFormat(".##");
 
     boolean isLoggedIn = true;
 
@@ -78,20 +83,25 @@ public class BasketActivity extends AppCompatActivity
 
 
         mShoppingList = (ListView) findViewById(R.id.shopping_listView);
-        mItemEdit = (EditText) findViewById(R.id.item_editText);
         mAddButton = (Button) findViewById(R.id.add_button);
         mclearButton = (Button) findViewById(R.id.clear_button);
+        mItemLabel = (TextView) findViewById(R.id.Item_Label);
 
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         mShoppingList.setAdapter(mAdapter);
 
+
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String item = mItemEdit.getText().toString();
-                mAdapter.add(item);
-                mAdapter.notifyDataSetChanged();
-                mItemEdit.setText("");
+                Double ShoppingListTotal = 0.0;
+                for (int i = 0; i < ShoppingList.size(); i++) {
+                    ShoppingList ActiveItem = ShoppingList.get(i);
+                    String Item_price = ActiveItem.getItemPrice();
+                    double total = Double.parseDouble(Item_price.substring(1));
+                    ShoppingListTotal = ShoppingListTotal + total;
+                }
+                mItemLabel.setText("Total = £" + df2.format(ShoppingListTotal));
             }
         });
         mclearButton.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +109,7 @@ public class BasketActivity extends AppCompatActivity
             public void onClick(View v) {
                 mAdapter.clear();
                 mAdapter.notifyDataSetChanged();
+                ShoppingList.clear();
             }
         });
 
@@ -107,11 +118,20 @@ public class BasketActivity extends AppCompatActivity
 
 
 
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         updateUI();
+        for (int i = 0; i < ShoppingList.size(); i++) {
+            ShoppingList ActiveItem = ShoppingList.get(i);
+            String Item_name = ActiveItem.getItemName();
+            String Item_price = ActiveItem.getItemPrice();
+            String Item_String = Item_name + ": " + Item_price;
+            mAdapter.add(Item_String);
+            mAdapter.notifyDataSetChanged();
+        }
     }
     private void updateUI() {
         System.out.println(isLoggedIn);

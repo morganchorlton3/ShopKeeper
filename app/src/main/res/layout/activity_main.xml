@@ -8,6 +8,68 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:paddingTop="50dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Popular Items"
+            android:textSize="24sp" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontal_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="horizontal">
+
+            <LinearLayout
+                android:id="@+id/img_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Popular Offers"
+            android:textSize="24sp" />
+
+        <HorizontalScrollView
+            android:id="@+id/Offers_horizontal_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="horizontal">
+
+            <LinearLayout
+                android:id="@+id/Offers_img_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"

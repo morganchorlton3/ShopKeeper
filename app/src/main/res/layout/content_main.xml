@@ -8,18 +8,16 @@
     tools:context="com.morgan.shopkeeper.MainActivity"
     tools:showIn="@layout/app_bar_main"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
 
-    <in.goodiebag.carouselpicker.CarouselPicker
-        android:id="@+id/carousel"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#CCC"
-        app:items_visible="three" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="65dp">
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
