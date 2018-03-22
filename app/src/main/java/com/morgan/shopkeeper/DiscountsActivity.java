@@ -87,10 +87,10 @@ public class DiscountsActivity extends AppCompatActivity
     }
     private void setUpPopular()
     {
-        final String name[]={"Chicken 1KG Pack","Large Eggs", "Beef Mince 500g","Bananas","Sugar 1KG","Light Mayonnaise","Heinz Tomato Ketchup","Pringles Originals"};
+        final String name[]={"Ferrero Rocher","Heinz Baked Beanz", "Beef Mince 500g","Bananas","Sugar 1KG","Light Mayonnaise","Heinz Tomato Ketchup","Pringles Originals"};
         final String price[]={"£5.99","£1.99","£3.70","£1.78","£3.20","£2.10","£1.78","£1.35"};
         final String Dicount_price[]={"£4.98","£1.80","£3.00","£1.76","£2.89","£1.89","£1.35","£1.05"};
-        Integer thumbnail[]={R.drawable.chicken_1kg, R.drawable.eggs_15pk,R.drawable.beef_500g, R.drawable.bananas,  R.drawable.sugar_1kg, R.drawable.heinz_mayonnaise_light, R.drawable.heinz_tomatoketchup,
+        Integer thumbnail[]={R.drawable.ferrero_rocher_giant_525g, R.drawable.heinz_beanz,R.drawable.beef_500g, R.drawable.bananas,  R.drawable.sugar_1kg, R.drawable.heinz_mayonnaise_light, R.drawable.heinz_tomatoketchup,
                 R.drawable.pringles_originila};
 
         for (int i=0;i<name.length; i++) {
@@ -131,10 +131,10 @@ public class DiscountsActivity extends AppCompatActivity
     }
     private void setUpOffers()
     {
-        final String name[]={"Whole Milk","Self Raising Flour", "Fair Trade Bananas","Heinz Tomato Ketchup","Actimel Clear 4 pack","Heinz Mayonnaise","Free Range Eggs","Pringles Original"};
+        final String name[]={"Sugar","Self Raising Flour", "Fair Trade Bananas","Heinz Tomato Ketchup","Actimel Clear 4 pack","Heinz Mayonnaise","Free Range Eggs","Pringles Original"};
         String price[]={"£2.30","£2.56","£3.10","£2.30","£3.45","£2.22","£1.70","£1.99"};
         final String Dicount_price[]={"£1.98","£2.30","£3.00","£1.79","£2.89","£1.89","£1.35","£1.75"};
-        Integer thumbnail[]={R.drawable.whole_milk, R.drawable.tesco_selfraisingflour_1kg,R.drawable.bananas, R.drawable.heinz_tomatoketchup, R.drawable.actimel_clear_4pk, R.drawable.heinz_mayonnaise_seriouslygood,
+        Integer thumbnail[]={R.drawable.sugar_1kg, R.drawable.tesco_selfraisingflour_1kg,R.drawable.bananas, R.drawable.heinz_tomatoketchup, R.drawable.actimel_clear_4pk, R.drawable.heinz_mayonnaise_seriouslygood,
                 R.drawable.eggs_15pk, R.drawable.pringles_originila,};
 
         for (int i=0;i<name.length; i++) {
